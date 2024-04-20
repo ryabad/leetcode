@@ -51,11 +51,7 @@ function wordPattern(pattern, s) {
     (item, index) => word.indexOf(item) === index
   );
 
-  if (filteredArray.length !== Object.keys(book).length) {
-    return false;
-  }
-
-  return true;
+  return filteredArray.length === Object.keys(book).length;
 }
 
 console.log(wordPattern("abba", "dog cat cat dog"));
