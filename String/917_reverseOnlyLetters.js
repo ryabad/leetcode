@@ -33,27 +33,15 @@ function reverseOnlyLetters(s) {
   let right = s.length - 1;
 
   while (left < right) {
-    while (
-      !(
-        (s.charCodeAt(left) >= 97 && s.charCodeAt(left) <= 122) ||
-        (s.charCodeAt(left) >= 65 && s.charCodeAt(left) <= 90)
-      ) &&
-      left < s.length
-    ) {
+    while (!isLetter(s[left]) && left < s.length) {
       left++;
     }
 
-    while (
-      !(
-        (s.charCodeAt(right) >= 97 && s.charCodeAt(right) <= 122) ||
-        (s.charCodeAt(right) >= 65 && s.charCodeAt(right) <= 90)
-      ) &&
-      right > 0
-    ) {
+    while (!isLetter(s[right]) && right > 0) {
       right--;
     }
 
-    if (left === s.length || right === 0 || left > right) {
+    if (left >= right) {
       return arrayOfChars.join("");
     }
 
@@ -65,6 +53,13 @@ function reverseOnlyLetters(s) {
   }
 
   return arrayOfChars.join("");
+}
+
+function isLetter(char) {
+  return (
+    (`${char}`.charCodeAt(0) >= 97 && `${char}`.charCodeAt(0) <= 122) ||
+    (`${char}`.charCodeAt(0) >= 65 && `${char}`.charCodeAt(0) <= 90)
+  );
 }
 
 console.log(reverseOnlyLetters("?6C40E"));
