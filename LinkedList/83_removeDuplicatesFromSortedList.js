@@ -1,0 +1,64 @@
+/*
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+Example 1:
+    (img\83\1.png)
+    Input: head = [1,1,2]
+    Output: [1,2]
+
+Example 2:
+    (img\83\2.png)
+    Input: head = [1,1,2,3,3]
+    Output: [1,2,3] 
+
+Constraints:
+    The number of nodes in the list is in the range [0, 300].
+    -100 <= Node.val <= 100
+    The list is guaranteed to be sorted in ascending order.
+*/
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+//My solution
+function deleteDuplicates(head) {
+  let dummy = new ListNode();
+  dummy = head;
+
+  let map = new Map();
+
+  let current = dummy;
+  let prev = null;
+
+  while (current) {
+    if (map.has(current.val)) {
+      prev.next = current.next;
+    } else {
+      prev = current;
+      map.set(current.val);
+    }
+    current = current.next;
+  }
+  return dummy;
+}
+
+//2nd solution (community)
+function deleteDp(head) {
+  let current = head;
+  while (current && current.next) {
+    if (current.val == current.next.val) {
+      current.next = current.next.next;
+    } else {
+      current = current.next;
+    }
+  }
+  return head;
+}
