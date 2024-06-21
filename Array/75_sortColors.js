@@ -22,27 +22,14 @@ Constraints:
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 function sortColors(nums) {
-  let pointer1 = 0;
-  let pointer2 = pointer1 + 1;
-
-  if (nums.length === 1) {
-    return nums;
-  }
-
-  let temp;
-  while (pointer1 < nums.length) {
-    if (nums[pointer2] < nums[pointer1]) {
-      temp = nums[pointer1];
-      nums[pointer1] = nums[pointer2];
-      nums[pointer2] = temp;
+  for (let i = 1; i < nums.length; i++) {
+    let key = nums[i];
+    let j = i - 1;
+    while (j >= 0 && key < nums[j]) {
+      nums[j + 1] = nums[j];
+      j -= 1;
     }
-
-    pointer2++;
-
-    if (pointer2 > nums.length) {
-      pointer1++;
-      pointer2 = pointer1 + 1;
-    }
+    nums[j + 1] = key;
   }
 }
 
